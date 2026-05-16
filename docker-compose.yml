@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+  # ── Python ML inference service ──────────────────────────────────────────────
+  ml:
+    build:
+      context: ./ml
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ml/models:/app/models:ro
+      - ./ml/reports:/app/reports
+      - ./ml/logs:/app/logs
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Node.js backend API ──────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - DEVICE_API_KEY=${DEVICE_API_KEY}
+      - ML_SERVICE_URL=http://ml:8000
+      - ALERT_LEAK_THRESHOLD=${ALERT_LEAK_THRESHOLD:-0.7}
+      - ALERT_SEVERITY_THRESHOLD=${ALERT_SEVERITY_THRESHOLD:-30}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+      - VAPID_PUBLIC_KEY=${VAPID_PUBLIC_KEY}
+      - VAPID_PRIVATE_KEY=${VAPID_PRIVATE_KEY}
+      - VAPID_SUBJECT=${VAPID_SUBJECT}
+    depends_on:
+      ml:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ── Next.js frontend ─────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+      - NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+      - NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+      - NEXT_PUBLIC_ML_SERVICE_URL=http://localhost:8000
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:4000
+    depends_on:
+      - backend
+    restart: unless-stopped

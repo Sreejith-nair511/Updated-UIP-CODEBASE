@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+  # ── Python ML inference service ──────────────────────────────────────────────
+  ml:
+    build:
+      context: ./ml
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ml/models:/app/models:ro
+      - ./ml/reports:/app/reports
+      - ./ml/logs:/app/logs
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY:-demo_key}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ── Node.js backend API ──────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+      - SUPABASE_URL=${SUPABASE_URL:-https://demo-project.supabase.co}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY:-demo_service_key}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY:-sk_test_demo_key}
+      - DEVICE_API_KEY=${DEVICE_API_KEY:-dev_api_key_12345}
+      - ML_SERVICE_URL=http://ml:8000
+      - ALERT_LEAK_THRESHOLD=${ALERT_LEAK_THRESHOLD:-0.7}
+      - ALERT_SEVERITY_THRESHOLD=${ALERT_SEVERITY_THRESHOLD:-30}
+      - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001
+      - VAPID_PUBLIC_KEY=${VAPID_PUBLIC_KEY:-demo_vapid_public}
+      - VAPID_PRIVATE_KEY=${VAPID_PRIVATE_KEY:-demo_vapid_private}
+      - VAPID_SUBJECT=${VAPID_SUBJECT:-mailto:demo@example.com}
+    depends_on:
+      ml:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:4000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ── Next.js frontend ─────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL:-https://demo-project.supabase.co}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY:-demo_anon_key}
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:-pk_test_demo_key}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY:-sk_test_demo_key}
+      - NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+      - NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+      - NEXT_PUBLIC_ML_SERVICE_URL=http://localhost:8000
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:4000
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+networks:
+  default:
+    driver: bridge

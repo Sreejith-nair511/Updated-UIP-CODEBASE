@@ -1,0 +1,12 @@
+app/api/webhook/clerk/route.ts(64,52): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ ...; }, ... 5 more ..., "POST">', gave the following error.
+    Argument of type '{ id: string; email: string; full_name: string | null; role: string; notifications_enabled: boolean; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<...>', gave the following error.
+    Object literal may only specify known properties, and 'id' does not exist in type 'never[]'.
+app/api/webhook/clerk/route.ts(81,15): error TS2345: Argument of type '{ email: string; full_name: string | null; }' is not assignable to parameter of type 'never'.
+hooks/useRealTimeAlerts.ts(102,15): error TS2345: Argument of type '{ status: string; acknowledged_by: string; acknowledged_at: string; }' is not assignable to parameter of type 'never'.
+hooks/useRealTimeAlerts.ts(124,15): error TS2345: Argument of type '{ status: string; resolved_at: string; }' is not assignable to parameter of type 'never'.
+lib/supabase/server.ts(16,16): error TS7006: Parameter 'cookiesToSet' implicitly has an 'any' type.
+lib/supabase/server.ts(18,37): error TS7031: Binding element 'name' implicitly has an 'any' type.
+lib/supabase/server.ts(18,43): error TS7031: Binding element 'value' implicitly has an 'any' type.
+lib/supabase/server.ts(18,50): error TS7031: Binding element 'options' implicitly has an 'any' type.

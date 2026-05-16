@@ -1,0 +1,26 @@
+{
+  "node": {
+    "23fac1f5fc5503c492592c9da8e48eacb8a36085": {
+      "workers": {
+        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Csreej%5C%5CDownloads%5C%5Cwater_leakage-unisys--master%5C%5Cwater_leakage-unisys--master%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%22invalidateCacheAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Csreej%5C%5CDownloads%5C%5Cwater_leakage-unisys--master%5C%5Cwater_leakage-unisys--master%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%22invalidateCacheAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/(dashboard)/alerts/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Csreej%5C%5CDownloads%5C%5Cwater_leakage-unisys--master%5C%5Cwater_leakage-unisys--master%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%22invalidateCacheAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/(dashboard)/pipes/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Csreej%5C%5CDownloads%5C%5Cwater_leakage-unisys--master%5C%5Cwater_leakage-unisys--master%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%22invalidateCacheAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/sign-in/[[...sign-in]]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Csreej%5C%5CDownloads%5C%5Cwater_leakage-unisys--master%5C%5Cwater_leakage-unisys--master%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%22invalidateCacheAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/(dashboard)/ai-monitor/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Csreej%5C%5CDownloads%5C%5Cwater_leakage-unisys--master%5C%5Cwater_leakage-unisys--master%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%22invalidateCacheAction%22%5D%5D%5D&__client_imported__=true!",
+        "app/(dashboard)/analytics/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Csreej%5C%5CDownloads%5C%5Cwater_leakage-unisys--master%5C%5Cwater_leakage-unisys--master%5C%5Cfrontend%5C%5Cnode_modules%5C%5C%40clerk%5C%5Cnextjs%5C%5Cdist%5C%5Cesm%5C%5Capp-router%5C%5Cserver-actions.js%22%2C%5B%22invalidateCacheAction%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/page": "action-browser",
+        "app/(dashboard)/dashboard/page": "action-browser",
+        "app/(dashboard)/alerts/page": "action-browser",
+        "app/(dashboard)/pipes/page": "action-browser",
+        "app/sign-in/[[...sign-in]]/page": "action-browser",
+        "app/(dashboard)/ai-monitor/page": "action-browser",
+        "app/(dashboard)/analytics/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "IZblarNapfuHWOiVSUDEEIEbzfkEqdjG6QkDSSTmA5s="
+}

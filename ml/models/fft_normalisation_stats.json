@@ -1,0 +1,32 @@
+{
+    "mean": [
+        0.0,
+        60.91446955519667,
+        45.62650237952687,
+        118.75135746606337,
+        2172.693892519262,
+        0.6815249996326681,
+        8.20720714689331,
+        0.186908100327456
+    ],
+    "std": [
+        1.0,
+        10.440730402783737,
+        2.2513131090383367,
+        5.221824672316862,
+        1212.0029974716865,
+        0.1122719390239003,
+        0.9455779331813345,
+        0.13264251810660943
+    ],
+    "feature_names": [
+        "fft_dominant_frequency",
+        "fft_spectral_centroid",
+        "fft_spectral_bandwidth",
+        "fft_spectral_rolloff_85",
+        "fft_spectral_energy",
+        "fft_spectral_flatness",
+        "fft_spectral_entropy",
+        "fft_top3_freq_ratio"
+    ]
+}
